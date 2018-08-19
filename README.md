@@ -143,7 +143,7 @@ try {
 require dirname(__DIR__) . '/../../vendor/autoload.php';
 
 $debug = false;
-$period = 15 * 1000;    // 每隔 60*1000ms (1分钟) 触发一次
+$period = 60 * 1000;    // 每隔 60*1000ms (1分钟) 触发一次
 $mission = function ($timerId) use ($debug) {
 
     $console = __DIR__ . '/console.php';
