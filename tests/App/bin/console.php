@@ -10,6 +10,8 @@ use Symfony\Component\Console\Application;
 use Tests\App\Command\DaemonFirstCommand;
 use Tests\App\Command\CrontabSecondCommand;
 use Tests\App\Command\CrontabFirstCommand;
+use Tests\App\Command\ShellCrontabFirstCommand;
+use Tests\App\Command\ShellCrontabSecondCommand;
 
 require dirname(__DIR__) . '/../../vendor/autoload.php';
 
@@ -19,6 +21,8 @@ $console->addCommands([
     new CrontabFirstCommand(),
     new CrontabSecondCommand(),
     new DaemonFirstCommand('pass-' . rand(100, 999)),
+    new ShellCrontabFirstCommand(),
+    new ShellCrontabSecondCommand(),
 ]);
 
 try {

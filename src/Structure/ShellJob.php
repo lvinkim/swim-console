@@ -2,25 +2,23 @@
 /**
  * Created by PhpStorm.
  * User: lvinkim
- * Date: 2018/8/18
- * Time: 8:52 PM
+ * Date: 2018/8/19
+ * Time: 11:51 AM
  */
 
 namespace Lvinkim\SwimConsole\Structure;
 
-
-class CrontabJob
+class ShellJob
 {
-
     /**
      * @var string
      */
     private $jobId;
 
     /**
-     * @var BuilderParam
+     * @var string
      */
-    private $builderParam;
+    private $command;
 
     /**
      * @var string
@@ -37,10 +35,10 @@ class CrontabJob
      */
     private $output;
 
-    public function __construct($jobId, BuilderParam $builderParam, $schedule = "* * * * *", $enabled = true)
+    public function __construct($jobId, $command, $schedule = "* * * * *", $enabled = true)
     {
         $this->jobId = strval($jobId);
-        $this->builderParam = $builderParam;
+        $this->command = strval($command);
         $this->schedule = strval($schedule);
         $this->enabled = boolval($enabled);
         $this->output = "";
@@ -51,7 +49,7 @@ class CrontabJob
      */
     public function getJobId(): string
     {
-        return strval($this->jobId);
+        return $this->jobId;
     }
 
     /**
@@ -63,19 +61,19 @@ class CrontabJob
     }
 
     /**
-     * @return BuilderParam
+     * @return string
      */
-    public function getBuilderParam(): BuilderParam
+    public function getCommand(): string
     {
-        return $this->builderParam;
+        return $this->command;
     }
 
     /**
-     * @param BuilderParam $builderParam
+     * @param string $command
      */
-    public function setBuilderParam(BuilderParam $builderParam): void
+    public function setCommand(string $command): void
     {
-        $this->builderParam = $builderParam;
+        $this->command = $command;
     }
 
     /**
@@ -83,7 +81,7 @@ class CrontabJob
      */
     public function getSchedule(): string
     {
-        return strval($this->schedule);
+        return $this->schedule;
     }
 
     /**
@@ -99,7 +97,7 @@ class CrontabJob
      */
     public function isEnabled(): bool
     {
-        return boolval($this->enabled);
+        return $this->enabled;
     }
 
     /**
@@ -115,7 +113,7 @@ class CrontabJob
      */
     public function getOutput(): string
     {
-        return strval($this->output);
+        return $this->output;
     }
 
     /**
