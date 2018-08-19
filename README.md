@@ -6,6 +6,11 @@
 > swoole >= 1.7.7  
 
 
+### 安装
+```php
+composer require lvinkim/swim-console
+```
+
 ### 守护任务
 
 ```php
