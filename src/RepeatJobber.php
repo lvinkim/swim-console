@@ -34,6 +34,7 @@ class RepeatJobber
      */
     public function add($jobId, array $config)
     {
+        $commandName = strval($config["commandName"] ?? "");
         $className = strval($config["command"] ?? "");
         $interval = intval($config["interval"] ?? 0);
         $depends = boolval($config["depends"] ?? false);
@@ -43,12 +44,15 @@ class RepeatJobber
         $commandOptions = (array)($config["commandOptions"] ?? []);
         $consoleClassName = strval($config["console"] ?? "");
         $consoleClassParam = (array)($config["consoleParam"] ?? []);
+        $autoBuildCommand = boolval($config["autoBuildCommand"] ?? true);
 
         $builderParam = new BuilderParam($className);
+        $commandName ? $builderParam->setCommandName($commandName) : null;
         $classParam ? $builderParam->setClassParam($classParam) : null;
         $commandOptions ? $builderParam->setCommandOptions($commandOptions) : null;
         $consoleClassName ? $builderParam->setConsoleClassName($consoleClassName) : null;
         $consoleClassParam ? $builderParam->setConsoleClassParam($consoleClassParam) : null;
+        $autoBuildCommand ? $builderParam->setAutoBuildCommand($autoBuildCommand) : null;
 
         $repeatJob = new RepeatJob($jobId, $builderParam);
         $repeatJob->setEnabled($enabled);

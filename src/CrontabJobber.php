@@ -35,6 +35,7 @@ class CrontabJobber
      */
     public function add($jobId, array $config)
     {
+        $commandName = strval($config["commandName"] ?? "");
         $className = strval($config["command"] ?? "");
         $schedule = strval($config["schedule"] ?? "");
         $enabled = boolval($config["enabled"] ?? false);
@@ -43,12 +44,15 @@ class CrontabJobber
         $commandOptions = (array)($config["commandOptions"] ?? []);
         $consoleClassName = strval($config["console"] ?? "");
         $consoleClassParam = (array)($config["consoleParam"] ?? []);
+        $autoBuildCommand = boolval($config["autoBuildCommand"] ?? true);
 
         $builderParam = new BuilderParam($className);
+        $commandName ? $builderParam->setCommandName($commandName) : null;
         $classParam ? $builderParam->setClassParam($classParam) : null;
         $commandOptions ? $builderParam->setCommandOptions($commandOptions) : null;
         $consoleClassName ? $builderParam->setConsoleClassName($consoleClassName) : null;
         $consoleClassParam ? $builderParam->setConsoleClassParam($consoleClassParam) : null;
+        $autoBuildCommand ? $builderParam->setAutoBuildCommand($autoBuildCommand) : null;
 
         $crontabJob = new CrontabJob($jobId, $builderParam);
         $crontabJob->setEnabled($enabled);

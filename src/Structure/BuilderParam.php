@@ -12,6 +12,12 @@ namespace Lvinkim\SwimConsole\Structure;
 class BuilderParam
 {
     /**
+     * Command 的名称
+     * @var string
+     */
+    private $commandName;
+
+    /**
      * Command 的类名
      * @var string
      */
@@ -41,12 +47,20 @@ class BuilderParam
      */
     private $consoleClassParam;
 
+    /**
+     * 是否自动 new Command，并 add 到 console 中
+     * @var bool
+     */
+    private $autoBuildCommand;
+
     public function __construct($className, array $classParam = [], array $commandOptions = [])
     {
         $this->className = strval($className);
         $this->classParam = $classParam;
         $this->commandOptions = $commandOptions;
 
+        $this->autoBuildCommand = true;
+        $this->commandName = "";
         $this->consoleClassName = "";
         $this->consoleClassParam = [];
     }
@@ -129,6 +143,38 @@ class BuilderParam
     public function setConsoleClassParam(array $consoleClassParam): void
     {
         $this->consoleClassParam = $consoleClassParam;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommandName(): string
+    {
+        return $this->commandName;
+    }
+
+    /**
+     * @param string $commandName
+     */
+    public function setCommandName(string $commandName): void
+    {
+        $this->commandName = $commandName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoBuildCommand(): bool
+    {
+        return $this->autoBuildCommand;
+    }
+
+    /**
+     * @param bool $autoBuildCommand
+     */
+    public function setAutoBuildCommand(bool $autoBuildCommand): void
+    {
+        $this->autoBuildCommand = $autoBuildCommand;
     }
 
 

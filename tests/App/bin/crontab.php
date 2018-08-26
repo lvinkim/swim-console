@@ -8,7 +8,7 @@
 
 require dirname(__DIR__) . '/../../vendor/autoload.php';
 
-$debug = false;
+$debug = true;
 $period = 15 * 1000;    // 每隔 60*1000ms (1分钟) 触发一次
 $mission = function ($timerId) use ($debug) {
 
@@ -33,6 +33,16 @@ $mission = function ($timerId) use ($debug) {
             "schedule" => '* * * * *',
             "enabled" => true,
             "output" => $logDir . "/crontab-cmd-second.log." . $date,
+        ]);
+
+        $crontabJobber->add("cmd-third", [
+            "console" => Symfony\Component\Console\Application::class,
+            "command" => \Tests\App\Command\CrontabThirdCommand::class,
+            "commandName" => "cmd:crontab:third",
+            "commandOptions" => ["--caller" => "crontab"],
+            "schedule" => '* * * * *',
+            "enabled" => true,
+            "output" => $logDir . "/crontab-cmd-third.log." . $date,
         ]);
 
         $crontabJobber->run();

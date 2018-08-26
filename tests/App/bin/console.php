@@ -7,9 +7,12 @@
  */
 
 use Symfony\Component\Console\Application;
+use Tests\App\Command\CrontabThirdCommand;
 use Tests\App\Command\DaemonFirstCommand;
 use Tests\App\Command\CrontabSecondCommand;
 use Tests\App\Command\CrontabFirstCommand;
+use Tests\App\Command\DaemonThirdCommand;
+use Tests\App\Command\RepeatThirdCommand;
 use Tests\App\Command\ShellCrontabFirstCommand;
 use Tests\App\Command\ShellCrontabSecondCommand;
 
@@ -20,9 +23,12 @@ $console = new Application('Symfony Console ');
 $console->addCommands([
     new CrontabFirstCommand(),
     new CrontabSecondCommand(),
+    new CrontabThirdCommand(),
     new DaemonFirstCommand('pass-' . rand(100, 999)),
+    new DaemonThirdCommand(),
     new ShellCrontabFirstCommand(),
     new ShellCrontabSecondCommand(),
+    new RepeatThirdCommand(),
 ]);
 
 try {

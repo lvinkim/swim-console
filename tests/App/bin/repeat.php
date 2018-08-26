@@ -9,7 +9,7 @@
 
 require dirname(__DIR__) . '/../../vendor/autoload.php';
 
-$debug = false;
+$debug = true;
 $logDir = __DIR__ . '/../var';
 $date = date('Y-m-d');
 
@@ -30,6 +30,15 @@ try {
         'interval' => 8000, // ms
         'enabled' => true,
         "output" => $logDir . "/repeat-cmd-second.log." . $date,
+    ]);
+
+    $repeatJobber->add("cmd-third", [
+        "console" => Symfony\Component\Console\Application::class,
+        "command" => \Tests\App\Command\RepeatThirdCommand::class,
+        "commandName" => "cmd:repeat:third",
+        'interval' => 3000, // ms
+        'enabled' => true,
+        "output" => $logDir . "/repeat-cmd-third.log." . $date,
     ]);
 
     $repeatJobber->run();

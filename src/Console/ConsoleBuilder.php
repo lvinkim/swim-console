@@ -38,10 +38,21 @@ class ConsoleBuilder
 
         $console->setAutoExit(false);
 
-        $command = $this->buildCommand();
-        $console->add($command);
+        if ($this->builderParam->isAutoBuildCommand()) {
+            $command = $this->buildCommand();
+            $console->add($command);
+            $commandName = $command->getName();
+        }
 
-        $parameters = ['command' => $command->getName()];
+        if ($this->builderParam->getCommandName()) {
+            $commandName = $this->builderParam->getCommandName();
+        }
+
+        if (!isset($commandName)) {
+            throw new \Exception("commandName not found");
+        }
+
+        $parameters = ['command' => $commandName];
         if ($this->builderParam->getCommandOptions()) {
             $parameters = array_merge($parameters, $this->builderParam->getCommandOptions());
         }
@@ -94,7 +105,7 @@ class ConsoleBuilder
     {
         $className = $this->builderParam->getClassName();
         if (!class_exists($className)) {
-            throw new \Exception("{$className} not exists");
+            throw new \Exception("commandClassName '{$className}' not exists");
         }
 
         $classParam = $this->builderParam->getClassParam();

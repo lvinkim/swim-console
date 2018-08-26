@@ -6,9 +6,10 @@
  * Time: 4:11 PM
  */
 
+
 require_once dirname(__DIR__) . '/../../vendor/autoload.php';
 
-$debug = false;
+$debug = true;
 $logDir = __DIR__ . '/../var';
 $date = date('Y-m-d');
 
@@ -31,6 +32,16 @@ try {
         'depends' => true,
         'enabled' => true,
         "output" => $logDir . "/daemon-cmd-second.log." . $date,
+    ]);
+
+    $daemonJobber->add("cmd-third", [
+        "console" => Symfony\Component\Console\Application::class,
+        "command" => \Tests\App\Command\DaemonThirdCommand::class,
+        "commandName" => "cmd:daemon:third",
+        'commandOptions' => ["--caller" => "daemon"],
+        'depends' => true,
+        'enabled' => true,
+        "output" => $logDir . "/daemon-cmd-third.log." . $date,
     ]);
 
     $daemonJobber->run();
