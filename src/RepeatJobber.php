@@ -52,7 +52,7 @@ class RepeatJobber
         $commandOptions ? $builderParam->setCommandOptions($commandOptions) : null;
         $consoleClassName ? $builderParam->setConsoleClassName($consoleClassName) : null;
         $consoleClassParam ? $builderParam->setConsoleClassParam($consoleClassParam) : null;
-        $autoBuildCommand ? $builderParam->setAutoBuildCommand($autoBuildCommand) : null;
+        $builderParam->setAutoBuildCommand($autoBuildCommand);
 
         $repeatJob = new RepeatJob($jobId, $builderParam);
         $repeatJob->setEnabled($enabled);

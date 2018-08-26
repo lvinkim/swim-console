@@ -52,7 +52,7 @@ class CrontabJobber
         $commandOptions ? $builderParam->setCommandOptions($commandOptions) : null;
         $consoleClassName ? $builderParam->setConsoleClassName($consoleClassName) : null;
         $consoleClassParam ? $builderParam->setConsoleClassParam($consoleClassParam) : null;
-        $autoBuildCommand ? $builderParam->setAutoBuildCommand($autoBuildCommand) : null;
+        $builderParam->setAutoBuildCommand($autoBuildCommand);
 
         $crontabJob = new CrontabJob($jobId, $builderParam);
         $crontabJob->setEnabled($enabled);

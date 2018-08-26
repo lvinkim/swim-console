@@ -53,7 +53,7 @@ class DaemonJobber
         $commandOptions ? $builderParam->setCommandOptions($commandOptions) : null;
         $consoleClassName ? $builderParam->setConsoleClassName($consoleClassName) : null;
         $consoleClassParam ? $builderParam->setConsoleClassParam($consoleClassParam) : null;
-        $autoBuildCommand ? $builderParam->setAutoBuildCommand($autoBuildCommand) : null;
+        $builderParam->setAutoBuildCommand($autoBuildCommand);
 
         $daemonJob = new DaemonJob($jobId, $builderParam);
         $daemonJob->setEnabled($enabled);
