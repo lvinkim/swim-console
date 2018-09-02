@@ -83,6 +83,8 @@ class CrontabJobber
 
             $childProcess = function () use ($crontabJob) {
 
+                Process::daemon();  // 将子进程蜕变为守护进程
+
                 swoole_set_process_name("job-" . $crontabJob->getJobId());
 
                 $output = $crontabJob->getOutput();
